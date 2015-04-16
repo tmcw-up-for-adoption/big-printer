@@ -32,3 +32,7 @@ Or low-resolution PNGs
 ```sh
 $ phantomjs printer.js http://url-to-big-presentation/presentation.html png 640 480
 ```
+
+## Examples
+
+[PNG output](http://imgur.com/a/XG1KA) of the [demo presentation](http://www.macwright.org/big/demo.html#0).
