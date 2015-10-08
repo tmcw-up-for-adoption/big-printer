@@ -1,45 +1,43 @@
-/* global big, phantom */
+var fs = require('fs'),
+  Handlebars = require('handlebars'),
+  glob = require('glob'),
+  path = require('path'),
+  argv = require('minimist')(process.argv.slice(2)),
+  exec = require('child_process').exec;
 
-var page = require('webpage').create();
-var system = require('system');
-var args = system.args;
+var style = fs.readFileSync('./lib/basscss.min.css', 'utf8');
+var template = Handlebars.compile(fs.readFileSync('./lib/template.hbs', 'utf8'));
+var imageDir = path.join(argv._[1], 'images');
 
-var bigURL = args[1];
-var format = args[2] || 'png';
+fs.mkdirSync(argv._[1]);
+fs.mkdirSync(imageDir);
 
-var dimensions = (args.length == 5) ?
-    [args[3], args[4]].map(function(n) { return parseInt(n, 10); }) :
-    [2560, 1440];
-
-console.log('big printer!');
-console.log('saving ' + bigURL + ' for posterity forever');
-console.log('as ' + format + ' at ' + dimensions.join('x') + '\n');
-
-page.viewportSize = { width: dimensions[0], height: dimensions[1] };
-
-function leftPad(str, width) {
-    var char = '0';
-    str = str.toString();
-    while (str.length < width) str = char + str;
-    return str;
-}
-
-page.open(bigURL, function() {
-  var slideCount = page.evaluate(function() { return big.length; });
-  console.log('presentation has ' + slideCount + ' slides!');
-  function getSlide(i) {
-      if (i >= slideCount) {
-          return phantom.exit();
-      } else {
-          page.evaluate(new Function('big.go(' + i + ')'));
-          setTimeout(function() {
-              console.log('page ' + (i + 1) + '...');
-              page.render('page-' + leftPad(i, 4) + '.' + format, {
-                  format: format
-              });
-              getSlide(++i);
-          }, 500);
-      }
+var child = exec(['phantomjs',
+  path.join(__dirname, '/lib/reader.js'),
+  argv._[0], imageDir].join(' '), function (error, stdout, stderr) {
+  if (error !== null) {
+    return new Error('exec error: ' + error);
   }
-  getSlide(0);
+
+  var images = glob.sync(path.join(imageDir, '*.png'));
+
+  var notes = stdout.split('\n')
+    .filter(function (note) { return note; })
+    .map(function (note) {
+      return JSON.parse(note);
+    })
+    .reduce(function (memo, note) {
+      memo[note.page] = note.message.replace('\n', ' ');
+      return memo;
+    }, {});
+
+  fs.writeFile(path.join(argv._[1], 'index.html'), template({
+    style: style,
+    slides: images.map(function (image, i) {
+      return {
+        image: 'images/' + path.basename(image),
+        note: notes[i]
+      };
+    })
+  }));
 });

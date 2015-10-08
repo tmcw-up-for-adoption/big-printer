@@ -1,0 +1,26 @@
+{
+  "name": "big-printer",
+  "version": "1.0.0",
+  "description": "Generate PNG & PDF output from [Big](https://github.com/tmcw/big) presentations.",
+  "main": "printer.js",
+  "dependencies": {
+    "glob": "^5.0.15",
+    "handlebars": "^4.0.3",
+    "minimist": "^1.2.0",
+    "screenshot-stream": "^1.3.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tmcw/big-printer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tmcw/big-printer/issues"
+  },
+  "homepage": "https://github.com/tmcw/big-printer#readme"
+}
