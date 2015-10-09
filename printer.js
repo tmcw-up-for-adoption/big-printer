@@ -5,8 +5,8 @@ var fs = require('fs'),
   argv = require('minimist')(process.argv.slice(2)),
   exec = require('child_process').exec;
 
-var style = fs.readFileSync('./lib/basscss.min.css', 'utf8');
-var template = Handlebars.compile(fs.readFileSync('./lib/template.hbs', 'utf8'));
+var style = fs.readFileSync(__dirname + '/lib/basscss.min.css', 'utf8');
+var template = Handlebars.compile(fs.readFileSync(__dirname + '/lib/template.hbs', 'utf8'));
 var imageDir = path.join(argv._[1], 'images');
 
 fs.mkdirSync(argv._[1]);
