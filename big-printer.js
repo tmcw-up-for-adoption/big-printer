@@ -33,10 +33,11 @@ var child = execFile(binPath, [
     })
     .filter(Boolean)
     .reduce(function (memo, note) {
-      memo[note.page] = note.message
-        .replace(/%c\d+:\s/, ' ')
-        .replace(/padding:5px;.*/, ' ')
-        .replace('\n', ' ');
+      memo[note.page] = (memo[note.page] || '') + '<p>' +
+        note.message
+        .replace(/%c%s: %s/, ' ')
+        .replace(/padding:5px.*?; [0-9]+ /, ' ')
+        .replace('\n', ' ') + '</p>\n';
       return memo;
     }, {});
 
