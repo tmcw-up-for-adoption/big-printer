@@ -11,7 +11,9 @@
     "minimist": "^1.2.0",
     "phantomjs": "^1.9.18"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "cz-conventional-changelog": "^2.0.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -24,5 +26,10 @@
   "bugs": {
     "url": "https://github.com/tmcw/big-printer/issues"
   },
-  "homepage": "https://github.com/tmcw/big-printer#readme"
+  "homepage": "https://github.com/tmcw/big-printer#readme",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
 }
