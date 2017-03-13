@@ -1,6 +1,6 @@
 {
   "name": "big-printer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Generate PNG & PDF output from [Big](https://github.com/tmcw/big) presentations.",
   "main": "big-printer.js",
   "bin": {
@@ -9,12 +9,14 @@
   "dependencies": {
     "handlebars": "^4.0.3",
     "minimist": "^1.2.0",
-    "phantomjs": "^1.9.18"
+    "phantomjs": "^1.9.18",
+    "standard-changelog": "^1.0.1"
   },
   "devDependencies": {
     "cz-conventional-changelog": "^2.0.0"
   },
   "scripts": {
+    "changelog": "standard-changelog -w changelog.md",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
