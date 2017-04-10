@@ -9,7 +9,7 @@
   "dependencies": {
     "handlebars": "^4.0.3",
     "minimist": "^1.2.0",
-    "phantomjs": "^1.9.18",
+    "phantomjs": "^2.1.7",
     "standard-changelog": "^1.0.1"
   },
   "devDependencies": {
