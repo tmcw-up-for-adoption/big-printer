@@ -1,5 +1,7 @@
 # big-printer
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/tmcw/big-printer.svg)](https://greenkeeper.io/)
+
 Prints notes for [Big](https://github.com/tmcw/big) presentations.
 
 Big is great for on-screen and on-projector presentations. For the small screen,
